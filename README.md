@@ -1,7 +1,7 @@
 # Snake Game
 
 ## Description
-This is a classic Snake Game implemented in C++. The game runs in the terminal and allows players to control a snake that moves around the screen, consuming food and growing in size while avoiding collisions with the walls and itself. The game features an expanded board size and maintains a high score record.
+This is the classic Snake Game. The game runs in the terminal and allows players to control a snake that moves around the screen, consuming food and growing in size while avoiding collisions with the walls and itself. The game maintains a high score record too. Our game is designed as per Windows ecosystem.
 
 ## Features
 - **Smooth Gameplay**: The snake moves continuously in the chosen direction.
@@ -52,13 +52,9 @@ This is a classic Snake Game implemented in C++. The game runs in the terminal a
 - Implement difficulty levels (adjustable speed or obstacles).
 - Add color to the game elements for better visuals.
 - Multiplayer mode with two snakes controlled separately.
-- Improve AI behavior for an autonomous snake mode.
 
 ## Author
-Developed by [Your Name]
-
-## License
-This project is open-source and can be modified or distributed freely.
+Developed by Siddhant,Pearl,Nikhil and Jay.
 
 Happy coding and enjoy the game!
 
