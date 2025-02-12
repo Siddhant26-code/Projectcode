@@ -1,47 +1,65 @@
-# Projectcode
-Siddhant Sareen 202404039
-Pearl Tarawat 202404029
-Jay Patel 202404012
-Nikhil Gupta 202404023
-
-
-# Snake Game in C++
+# Snake Game
 
 ## Description
-This is a simple console-based Snake game written in C++. The game is played within a terminal window where the player controls a snake using the keyboard. The goal is to eat the fruit and grow the snake without colliding with itself.
+This is a classic Snake Game implemented in C++. The game runs in the terminal and allows players to control a snake that moves around the screen, consuming food and growing in size while avoiding collisions with the walls and itself. The game features an expanded board size and maintains a high score record.
 
 ## Features
-- Classic snake movement
-- Randomly placed fruit
-- Score tracking
-- Walls wrap around (no collision with borders)
+- **Smooth Gameplay**: The snake moves continuously in the chosen direction.
+- **Expanded Play Area**: The board width has been increased to 70 for better gameplay.
+- **Food Mechanics**: Randomly generated food that increases the snake's length when consumed.
+- **Collision Detection**: The game ends when the snake collides with itself or the wall.
+- **High Score Tracking**: The highest score is stored in a file (`highscore.txt`) and displayed at the end of the game.
+- **Pause Functionality**: Press `P` to pause or resume the game.
+- **Bordered Play Area**: The snake is confined within a bordered area for a structured gameplay experience.
 
 ## Controls
-- `W` - Move Up
-- `S` - Move Down
-- `A` - Move Left
-- `D` - Move Right
-- `X` - Quit the game
+- `W` / `Arrow Up` → Move Up
+- `S` / `Arrow Down` → Move Down
+- `A` / `Arrow Left` → Move Left
+- `D` / `Arrow Right` → Move Right
+- `P` → Pause/Resume Game
 
-## How to Run
-1. Compile the program using a C++ compiler (e.g., g++):
-   ```sh
-   g++ snake.cpp -o snake
+## How to Run the Game
+1. Ensure you have a **C++ compiler** installed (such as MinGW for Windows or g++ for Linux/Mac).
+2. Copy the source code into a `.cpp` file (e.g., `snake_game.cpp`).
+3. Open a terminal or command prompt in the directory containing the file.
+4. Compile the program using the following command:
    ```
-2. Run the executable:
-   ```sh
-   ./snake  # On Linux/Mac
-   snake.exe  # On Windows
+   g++ snake_game.cpp -o snake_game.exe
+   ```
+5. Run the compiled program:
+   ```
+   ./snake_game.exe  (Windows)
+   ./snake_game      (Linux/Mac)
    ```
 
-## Dependencies
-- Uses `<iostream>` for input/output
-- Uses `<conio.h>` (only available on Windows for `_kbhit()` and `_getch()`). If using Linux, consider `ncurses` for input handling.
+## Prerequisites
+- Windows OS (for `windows.h` functions such as `SetConsoleCursorPosition` and `Sleep`).
+- A C++ compiler like MinGW (`g++`).
 
-## Improvements
-- Add a game-over screen with a restart option
-- Implement a better input handling mechanism for cross-platform compatibility
-- Introduce difficulty levels with speed variations
+## Game Mechanics
+1. The snake starts at the center of the board with an initial length of 3.
+2. It moves automatically in the last given direction.
+3. When the snake eats food (`X`), it grows in length and the score increases.
+4. If the snake hits the border (`#`) or itself (`O`), the game ends.
+5. The high score is stored and displayed after the game ends.
+
+## File Details
+- `snake_game.cpp` → Contains the main game logic and implementation.
+- `highscore.txt` → Stores the highest score achieved in previous games.
+
+## Possible Enhancements
+- Implement difficulty levels (adjustable speed or obstacles).
+- Add color to the game elements for better visuals.
+- Multiplayer mode with two snakes controlled separately.
+- Improve AI behavior for an autonomous snake mode.
+
+## Author
+Developed by [Your Name]
 
 ## License
-This project is open-source and available under the MIT License.
+This project is open-source and can be modified or distributed freely.
+
+Happy coding and enjoy the game!
+
+
