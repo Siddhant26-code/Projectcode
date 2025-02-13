@@ -39,7 +39,7 @@ This is the classic Snake Game. The game runs in the terminal and allows players
 
 ## Game Mechanics
 1. The snake starts at the center of the board with an initial length of 3.
-2. It moves automatically in the last given direction.
+2. It moves automatically in the last given direction(except during the start of a new game).
 3. When the snake eats food (`X`), it grows in length and the score increases.
 4. If the snake hits the border (`#`) or itself (`O`), the game ends.
 5. The high score is stored and displayed after the game ends.
