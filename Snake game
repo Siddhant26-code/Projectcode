@@ -2,7 +2,7 @@
 #include <vector>
 #include <conio.h> // For _kbhit() and _getch()
 #include <cstdlib> // For rand() and srand()
-#include <ctime>   // For seeding random number generator
+#include <ctime> // For seeding random number generator
 #include <windows.h> // For Sleep() and SetConsoleCursorPosition()
 #include <fstream> // For file operations
 
@@ -17,42 +17,34 @@ const char BORDER_CELL = '#';
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
-class Food 
-{
+class Food {
 public:
     int x, y;
 
-    void generateFood(const vector<pair<int, int>> &snake) 
-{
-        while (true) 
-{
+    void generateFood(const vector<pair<int, int>> &snake) {
+        while (true) {
             x = rand() % (BOARD_WIDTH - 2) + 1; // Keep food inside the border
             y = rand() % (BOARD_HEIGHT - 2) + 1;
 
             // Ensure food does not spawn on the snake
             bool onSnake = false;
-            for (const auto &segment : snake) 
-{
-                if (segment.first == x && segment.second == y) 
-{
+            for (const auto &segment : snake) {
+                if (segment.first == x && segment.second == y) {
                     onSnake = true;
                     break;
                 }
             }
-
             if (!onSnake) break;
         }
     }
 };
 
-class Snake 
-{
+class Snake {
 public:
     vector<pair<int, int>> body;
     Direction direction;
 
-    Snake() 
-    {
+    Snake() {
         // Initialize snake at a proper position inside the border
         int startX = BOARD_WIDTH / 2, startY = BOARD_HEIGHT / 2;
         body.push_back({startX, startY});
@@ -61,12 +53,10 @@ public:
         direction = RIGHT;
     }
 
-    void move(bool grow = false) 
-{
+    void move(bool grow = false) {
         // Calculate new head position
         pair<int, int> head = body.front();
-        switch (direction) 
-        {
+        switch (direction) {
             case UP: head.second--; break;
             case DOWN: head.second++; break;
             case LEFT: head.first--; break;
@@ -80,31 +70,24 @@ public:
         if (!grow) body.pop_back();
     }
 
-    bool checkCollision() 
-{
+    bool checkCollision() {
         // Check collision with walls
         pair<int, int> head = body.front();
-        if (head.first <= 0 || head.first >= BOARD_WIDTH - 1 || 
-            head.second <= 0 || head.second >= BOARD_HEIGHT - 1) 
-        {
+        if (head.first <= 0 || head.first >= BOARD_WIDTH - 1 || head.second <= 0 || head.second >= BOARD_HEIGHT - 1) {
             return true;
         }
 
         // Check self-collision
-        for (size_t i = 1; i < body.size(); i++) 
-        {
-            if (body[i] == head) 
-            {
+        for (size_t i = 1; i < body.size(); i++) {
+            if (body[i] == head) {
                 return true;
             }
         }
-
         return false;
     }
 };
 
-class Game 
-{
+class Game {
 private:
     Snake snake;
     Food food;
@@ -115,32 +98,26 @@ private:
     bool paused;
     vector<vector<char>> buffer;
 
-    void render() 
-       {
+    void render() {
         // Clear buffer
-        for (int i = 0; i < BOARD_HEIGHT; i++) 
-        {
-            for (int j = 0; j < BOARD_WIDTH; j++) 
-            {
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
                 buffer[i][j] = EMPTY_CELL;
             }
         }
 
         // Render borders
-        for (int i = 0; i < BOARD_HEIGHT; i++) 
-        {
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
             buffer[i][0] = BORDER_CELL;
             buffer[i][BOARD_WIDTH - 1] = BORDER_CELL;
         }
-        for (int j = 0; j < BOARD_WIDTH; j++) 
-        {
+        for (int j = 0; j < BOARD_WIDTH; j++) {
             buffer[0][j] = BORDER_CELL;
             buffer[BOARD_HEIGHT - 1][j] = BORDER_CELL;
         }
 
         // Render snake
-        for (const auto &segment : snake.body) 
-        {
+        for (const auto &segment : snake.body) {
             buffer[segment.second][segment.first] = SNAKE_CELL;
         }
 
@@ -152,10 +129,8 @@ private:
 
         // Print the buffer to the console in one go
         string screen;
-        for (int i = 0; i < BOARD_HEIGHT; i++) 
-        {
-            for (int j = 0; j < BOARD_WIDTH; j++)
-            {
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
                 screen += buffer[i][j];
             }
             screen += '\n';
@@ -163,29 +138,22 @@ private:
         cout << screen;
 
         // Display score
-        cout << "Score: " << score << "  High Score: " << highScore << endl;
+        cout << "Score: " << score << " High Score: " << highScore << endl;
     }
 
-    void handleInput() 
-    {
-        if (_kbhit()) 
-        {
+    void handleInput() {
+        if (_kbhit()) {
             char input = _getch();
-            if (input == 0 || input == -32) 
-            { 
-                input = _getch(); 
-                switch (input) 
-                {
+            if (input == 0 || input == -32) {
+                input = _getch();
+                switch (input) {
                     case 72: if (snake.direction != DOWN) snake.direction = UP; break;
                     case 80: if (snake.direction != UP) snake.direction = DOWN; break;
                     case 75: if (snake.direction != RIGHT) snake.direction = LEFT; break;
                     case 77: if (snake.direction != LEFT) snake.direction = RIGHT; break;
                 }
-            }
-            else 
-            {
-                switch (input) 
-                {
+            } else {
+                switch (input) {
                     case 'w': if (snake.direction != DOWN) snake.direction = UP; break;
                     case 's': if (snake.direction != UP) snake.direction = DOWN; break;
                     case 'a': if (snake.direction != RIGHT) snake.direction = LEFT; break;
@@ -196,27 +164,20 @@ private:
         }
     }
 
-    void loadHighScore() 
-    {
+    void loadHighScore() {
         ifstream file("highscore.txt");
-        if (file.is_open()) 
-        {
+        if (file.is_open()) {
             file >> highScore;
             file.close();
-        } 
-            else 
-        {
+        } else {
             highScore = 0;
         }
     }
 
-    void saveHighScore() 
-    {
-        if (score > highScore) 
-        {
+    void saveHighScore() {
+        if (score > highScore) {
             ofstream file("highscore.txt");
-            if (file.is_open()) 
-            {
+            if (file.is_open()) {
                 file << score;
                 file.close();
             }
@@ -224,8 +185,7 @@ private:
     }
 
 public:
-    Game() : score(0), paused(false) 
-    {
+    Game() : score(0), paused(false) {
         srand(time(0));
         food.generateFood(snake.body);
         console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -240,34 +200,27 @@ public:
         SetConsoleCursorInfo(console, &cursorInfo);
     }
 
-    void play() 
-    {
-        while (true) 
-        {
-            if (!paused) 
-            {
+    void play() {
+        while (true) {
+            if (!paused) {
                 render();
                 handleInput();
                 snake.move();
 
-                if (snake.checkCollision()) 
-                {
+                if (snake.checkCollision()) {
                     cout << "Game Over! Final Score: " << score << endl;
                     saveHighScore();
                     break;
                 }
 
-                if (snake.body.front().first == food.x && snake.body.front().second == food.y) 
-                {
+                if (snake.body.front().first == food.x && snake.body.front().second == food.y) {
                     score++;
                     snake.move(true);
                     food.generateFood(snake.body);
                 }
 
                 Sleep(100);
-            } 
-               else 
-            {
+            } else {
                 handleInput();
                 Sleep(100);
             }
@@ -275,15 +228,20 @@ public:
     }
 };
 
-int main() 
-{
-    cout << "Welcome to the Snake Game!" << endl;
-    cout << "Controls: W/^ (Up), A/< (Left), S/v (Down), D/> (Right), P (Pause)" << endl;
-    cout << "Press any key to start..." << endl;
-    _getch();
+int main() {
+    char playAgain;
+    do {
+        cout << "Welcome to the Snake Game!" << endl;
+        cout << "Controls: W/^ (Up), A/< (Left), S/v (Down), D/> (Right), P (Pause)" << endl;
+        cout << "Press any key to start..." << endl;
+        _getch();
 
-    Game game;
-    game.play();
+        Game game;
+        game.play();
+
+        cout << "Do you want to play again? (y/n): ";
+        cin >> playAgain;
+    } while (playAgain == 'y' || playAgain == 'Y');
 
     return 0;
 }
