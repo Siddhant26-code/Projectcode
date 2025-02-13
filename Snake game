@@ -2,7 +2,7 @@
 #include <vector>
 #include <conio.h> // For _kbhit() and _getch()
 #include <cstdlib> // For rand() and srand()
-#include <ctime> // For seeding random number generator
+#include <ctime>   // For seeding random number generator
 #include <windows.h> // For Sleep() and SetConsoleCursorPosition()
 #include <fstream> // For file operations
 
@@ -34,6 +34,7 @@ public:
                     break;
                 }
             }
+
             if (!onSnake) break;
         }
     }
@@ -73,7 +74,8 @@ public:
     bool checkCollision() {
         // Check collision with walls
         pair<int, int> head = body.front();
-        if (head.first <= 0 || head.first >= BOARD_WIDTH - 1 || head.second <= 0 || head.second >= BOARD_HEIGHT - 1) {
+        if (head.first <= 0 || head.first >= BOARD_WIDTH - 1 || 
+            head.second <= 0 || head.second >= BOARD_HEIGHT - 1) {
             return true;
         }
 
@@ -83,6 +85,7 @@ public:
                 return true;
             }
         }
+
         return false;
     }
 };
@@ -138,14 +141,14 @@ private:
         cout << screen;
 
         // Display score
-        cout << "Score: " << score << " High Score: " << highScore << endl;
+        cout << "Score: " << score << "  High Score: " << highScore << endl;
     }
 
     void handleInput() {
         if (_kbhit()) {
             char input = _getch();
-            if (input == 0 || input == -32) {
-                input = _getch();
+            if (input == 0 || input == -32) { 
+                input = _getch(); 
                 switch (input) {
                     case 72: if (snake.direction != DOWN) snake.direction = UP; break;
                     case 80: if (snake.direction != UP) snake.direction = DOWN; break;
@@ -219,29 +222,23 @@ public:
                     food.generateFood(snake.body);
                 }
 
-                Sleep(100);
+                Sleep(75);
             } else {
                 handleInput();
-                Sleep(100);
+                Sleep(75);
             }
         }
     }
 };
 
 int main() {
-    char playAgain;
-    do {
-        cout << "Welcome to the Snake Game!" << endl;
-        cout << "Controls: W/^ (Up), A/< (Left), S/v (Down), D/> (Right), P (Pause)" << endl;
-        cout << "Press any key to start..." << endl;
-        _getch();
+    cout << "Welcome to the Snake Game!" << endl;
+    cout << "Controls: W/^ (Up), A/< (Left), S/v (Down), D/> (Right), P (Pause)" << endl;
+    cout << "Press any key to start..." << endl;
+    _getch();
 
-        Game game;
-        game.play();
-
-        cout << "Do you want to play again? (y/n): ";
-        cin >> playAgain;
-    } while (playAgain == 'y' || playAgain == 'Y');
+    Game game;
+    game.play();
 
     return 0;
 }
