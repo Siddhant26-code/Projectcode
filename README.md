@@ -54,8 +54,7 @@ This is the classic Snake Game. The game runs in the terminal and allows players
 - Multiplayer mode with two snakes controlled separately.
 
 ## Author
-Developed by Siddhant,Pearl,Nikhil and Jay.
+Developed by Siddhant, Pearl, Nikhil and Jay.
 
-Happy coding and enjoy the game!
 
 
